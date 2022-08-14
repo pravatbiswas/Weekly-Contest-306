@@ -1,1 +1,17 @@
-
+class Solution:
+    def smallestNumber(self, pattern: str) -> str:
+        def solve(p, digits):
+            if not p:
+                return min(digits)
+            for d in sorted(digits):
+                rem = digits[:]
+                rem.remove(d)
+                rest = solve(p[1:], rem)
+                if p[0] == 'I':
+                    if d < rest[0]:
+                        return d + rest
+                else:
+                    if d > rest[0]:
+                        return d + rest
+        
+        return solve(pattern, list('123456789'))
